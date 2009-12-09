@@ -1,0 +1,125 @@
+<html>
+<head><title>URL Shortener Settings</title></head>
+<style type="text/css">
+body {
+    font-size: 12px;
+    font-color: #333;
+    font-family:Helvetica,Arial,sans-serif;
+    background: #d5e4f7;
+    padding: 3px 320px;
+}
+textarea{
+    border: 1px solid #b7c5e3;
+    margin: 0;
+    height: 64px;
+    width: 320px;
+    resize: none;
+    background: #f0f5fb;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 2px;
+    font-size: 12px;
+    position: relative;
+    z-index: 10;
+}
+textarea:focus {
+    background: #fff;
+}
+textarea.full {
+    border-color: #f60;
+}
+
+#d_clip_container span {
+    background: #aaa; /*background: #f60;*/
+    display: inline-block;
+    padding: 2px 5px;
+    color: #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+   /*  cursor: pointer;*/
+}
+
+span {
+    display: inline-block;
+    padding: 5px 5px;    
+    border: 1px solid #d5e4f7;
+    -webkit-border-radius: 3px;
+     /*cursor: pointer;*/
+}
+span:hover{border:1px solid #b7c5e3;}
+#clean {
+	width:75%; 
+	color: #fff;
+	text-align:center; 
+	/*border:1px solid black; */
+	background-color:#aaa; 	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	margin:5px; padding:5px; 
+        }
+#clean.hover { background-color:#eee; }
+#clean.active { background-color:#aaa; }
+
+
+</style>
+<script type="text/javascript">
+function $(id) { return document.getElementById(id); }
+
+//saves options to localstorage
+function save_options(){
+	localStorage["username"] = $('username').value;
+	localStorage["password"] = $('password').value;
+	if($('includetitle').checked)localStorage['includetitle']='true';	else localStorage['includetitle']='false';
+	if($('isgd').checked)localStorage['isgd']='true';	else localStorage['isgd']='false';
+	if($('irpe').checked)localStorage['irpe']='true';	else localStorage['irpe']='false';
+	if($('tiny').checked)localStorage['tiny']='true';	else localStorage['tiny']='false';
+	if($('trim').checked)localStorage['trim']='true';	else localStorage['trim']='false';
+	if($('cligs').checked)localStorage['cligs']='true';	else localStorage['cligs']='false';
+	if($('bitly').checked)localStorage['bitly']='true';	else localStorage['bitly']='false';	
+	localStorage["bitlyid"] = $('bitlyid').value;
+	localStorage["bitlyapi"] = $('bitlyapi').value;
+	//if($('snipurl').checked)localStorage['snipurl']='true';	else localStorage['snipurl']='false';
+	window.close();
+}
+
+//read options
+function read_options(){
+	$('username').value=localStorage['username'];	
+	$('password').value=localStorage['password'];
+	if(localStorage['includetitle']=='true')$('includetitle').checked=true;
+	if(localStorage['isgd']=='true')$('isgd').checked=true;
+	if(localStorage['irpe']=='true')$('irpe').checked=true;
+	if(localStorage['tiny']=='true')$('tiny').checked=true;
+	if(localStorage['trim']=='true')$('trim').checked=true;
+	if(localStorage['cligs']=='true')$('cligs').checked=true;
+	if(localStorage['bitly']=='true')$('bitly').checked=true;
+	$('bitlyid').value=localStorage['bitlyid'];
+	$('bitlyapi').value=localStorage['bitlyapi'];
+	//if(localStorage['snipurl']=='true')$('snipurl').checked=true;
+}
+
+</script>
+<body onload="read_options()">
+<h3>Options</h3>
+<fieldset>
+<legend accesskey=S>Choose which services to use:</legend>
+<span style="width:96%">Copy the title of the current site<input type="checkbox" id="includetitle"/></span><br />
+<span style="width:96%"><img src="bit.ly.png" /> Bit.ly<input type="checkbox" id="bitly"/><br />Requires your ID and APIKey : <br />ID: <input type="text" style="width:70%" id="bitlyid" /> <br />API<input type="text" style="width:70%" id="bitlyapi"/></span><br />
+<span style="width:96%"><img src="is.gd.png" /> Is.gd<input type="checkbox" id="isgd" /></span><br/>
+<span style="width:96%"><img src="tinyurl.bmp" /> TinyURL<input type="checkbox" id="tiny" /></span><br />
+<!--SnipURL<input type="checkbox" /><br/>Requires your ID and APIKey : ID: <input type="text" /> API <input type="text" /><br />-->
+<span style="width:96%"><img src="ir.pe.png" /> Ir.Pe<input type="checkbox" id="irpe" /></span><br/>
+<span style="width:96%"><img src="tr.im.png" /> Tr.Im<input type="checkbox" id="trim" /></span><br/>
+<span style="width:96%"><img src="cligs.png" /> Cli.Gs<input type="checkbox" id="cligs" /></span><br/>
+</fieldset>
+<div align="center">
+<fieldset>
+<legend accesskey=T>Your twitter login:</legend>
+<span>Username:<input type="text" id="username" name="username" /><br /></span>
+<span>Password:<input type="password" id="password" name="password" /><br /></span>
+</fieldset>
+<button onclick="save_options()">Save</button>
+<button onclick="window.close()">Cancel</button>
+</div>
+</body>
+</html>
