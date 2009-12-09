@@ -1,0 +1,25 @@
+{
+  "name": "URLShortener",
+  "version": "1.0",
+  "description": "Shorcut URLs",
+  "icons":{	
+	"16": "ir16.png",
+	"32": "ir32.png",
+	"48": "ir48.png",
+	"128": "ir128.png",
+	"256": "ir256.png"
+  },
+  "background_page": "url.html",  
+  "author":"vhanla",  
+  "options_page": "option.html",
+  "permissions": [
+    "tabs","http://*/","https://*/"
+  ],
+  
+  "browser_action": {
+      "default_icon": "ir16.png",
+      "default_title": "Shorten URLs",
+      "popup": "popup.html"
+   }
+  
+}
