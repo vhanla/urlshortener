@@ -1,7 +1,7 @@
 {
   "name": "URLShortener",
   "version": "1.0",
-  "description": "Shorcut URLs",
+  "description": "Shorten URLs",
   "icons":{	
 	"16": "ir16.png",
 	"32": "ir32.png",
