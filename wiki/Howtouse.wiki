@@ -20,14 +20,20 @@ Just go to the download page and click on the downloadable file "urlshortener.cr
 
 After that you will need to configure it so, click _settings_ on the popup window.
 
+[http://urlshortener.googlecode.com/svn/wiki/settings.png]
+
 On the options page you can choose which URL shortener services you would like to use, and BitLy needs you user name and API Key in order to work properly.
 
 It has an option to retrieve the current website's title and copy along with the shortened URL so it becomes easy to post to twitter without having to write anything.
 
+[http://urlshortener.googlecode.com/svn/wiki/urlshortener.png]
+
+Something similar to this will be shown after configuration.
+
 *_There are 2 ways to post to twitter:_*
 
-- Using twitter.com itself to publish your status: This is shown as "Use twitter" and opens a new twitter page ready to post your tweet from the text area but you need be logged in twitter.com and keep the session active.
+* Using twitter.com itself to publish your status: This is shown as "Use twitter" and opens a new twitter page ready to post your tweet from the text area but you need be logged in twitter.com and keep the session active.
 
-- Posting directly to twitter: This is shown as "Tweet now" and you need to have set up your twitter credentials in the settings page. It uses a Basic Authentication over https://twitter.com
+* Posting directly to twitter: This is shown as "Tweet now" and you need to have set up your twitter credentials in the settings page. It uses a Basic Authentication over https://twitter.com
 
 *Remember, all this settings are kept in you localStorage and none of them are published to any other place, so you have the source code here published and you can verify that*
