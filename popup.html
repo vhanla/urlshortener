@@ -43,6 +43,7 @@ span {
     border: 1px solid #d5e4f7;
     -webkit-border-radius: 3px;
      cursor: pointer;
+     color: #000;
 }
 span:hover{border:1px solid #b7c5e3;}
 #clean {
@@ -58,12 +59,52 @@ span:hover{border:1px solid #b7c5e3;}
 #clean.hover { background-color:#eee; }
 #clean.active { background-color:#aaa; }
 
+a{color:#000;}
+#user {padding:0 20%; list-style-type:none; }
+#user li {display:block; float:left; width:30px; height:30px; position:relative;}
+#user li a {display:block; width:20px; height:20px; background:transparent; overflow:hidden; position:relative;}
+#user li a img {width:100%; height:100%; border:0;}
+#user li a:hover {position:absolute; left:-10px; top:-10px; width:50px; height:50px; z-index:100;}
+/*#user li a:hover {position:absolute; left:-2px; top:-5px; width:30px; height:30px; z-index:100;}*/
 
+ 
+ 
+#bgadmin{
+	-moz-opacity: 0.7;
+	opacity: 0.7;
+	top: 0;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;	
+
+	background-color: black;	
+	z-index: 99;
+}
+ 
+#bgadmin2{	
+	z-index: 100;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	position: fixed;
+	top: 0;	
+
+}
+ 
+#admin2{	
+	width: 330px;
+	color: #fff;
+	padding: 20px 0px;
+}
+ 
 </style>
 <script type="text/javascript" >
+if (!this.JSON) {this.JSON = {};}(function () {    function f(n) {        return n < 10 ? '0' + n : n;    }    if (typeof Date.prototype.toJSON !== 'function') {        Date.prototype.toJSON = function (key) {            return isFinite(this.valueOf()) ?                   this.getUTCFullYear()   + '-' +                 f(this.getUTCMonth() + 1) + '-' +                 f(this.getUTCDate())      + 'T' +                 f(this.getUTCHours())     + ':' +                 f(this.getUTCMinutes())   + ':' +                 f(this.getUTCSeconds())   + 'Z' : null;        };        String.prototype.toJSON =        Number.prototype.toJSON =        Boolean.prototype.toJSON = function (key) {            return this.valueOf();        };    }    var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,        escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,        gap,        indent,        meta = {                '\b': '\\b',            '\t': '\\t',            '\n': '\\n',            '\f': '\\f',            '\r': '\\r',            '"' : '\\"',            '\\': '\\\\'        },        rep;    function quote(string) {        escapable.lastIndex = 0;        return escapable.test(string) ?            '"' + string.replace(escapable, function (a) {                var c = meta[a];                return typeof c === 'string' ? c :                    '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);            }) + '"' :            '"' + string + '"';    }    function str(key, holder) {        var i,                      k,                      v,                      length,            mind = gap,            partial,            value = holder[key];        if (value && typeof value === 'object' &&                typeof value.toJSON === 'function') {            value = value.toJSON(key);        }        if (typeof rep === 'function') {            value = rep.call(holder, key, value);        }        switch (typeof value) {        case 'string':            return quote(value);        case 'number':            return isFinite(value) ? String(value) : 'null';        case 'boolean':        case 'null':            return String(value);        case 'object':            if (!value) {                return 'null';            }            gap += indent;            partial = [];            if (Object.prototype.toString.apply(value) === '[object Array]') {                length = value.length;                for (i = 0; i < length; i += 1) {                    partial[i] = str(i, value) || 'null';                }                v = partial.length === 0 ? '[]' :                    gap ? '[\n' + gap +                            partial.join(',\n' + gap) + '\n' +                                mind + ']' :                          '[' + partial.join(',') + ']';                gap = mind;                return v;            }            if (rep && typeof rep === 'object') {                length = rep.length;                for (i = 0; i < length; i += 1) {                    k = rep[i];                    if (typeof k === 'string') {                        v = str(k, value);                        if (v) {                            partial.push(quote(k) + (gap ? ': ' : ':') + v);                        }                    }                }            } else {                for (k in value) {                    if (Object.hasOwnProperty.call(value, k)) {                        v = str(k, value);                        if (v) {                            partial.push(quote(k) + (gap ? ': ' : ':') + v);                        }                    }                }            }            v = partial.length === 0 ? '{}' :                gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +                        mind + '}' : '{' + partial.join(',') + '}';            gap = mind;            return v;        }    }    if (typeof JSON.stringify !== 'function') {        JSON.stringify = function (value, replacer, space) {            var i;            gap = '';            indent = '';            if (typeof space === 'number') {                for (i = 0; i < space; i += 1) {                    indent += ' ';                }            } else if (typeof space === 'string') {                indent = space;            }            rep = replacer;            if (replacer && typeof replacer !== 'function' &&                    (typeof replacer !== 'object' ||                     typeof replacer.length !== 'number')) {                throw new Error('JSON.stringify');            }            return str('', {'': value});        };    }    if (typeof JSON.parse !== 'function') {        JSON.parse = function (text, reviver) {            var j;            function walk(holder, key) {                var k, v, value = holder[key];                if (value && typeof value === 'object') {                    for (k in value) {                        if (Object.hasOwnProperty.call(value, k)) {                            v = walk(value, k);                            if (v !== undefined) {                                value[k] = v;                            } else {                                delete value[k];                            }                        }                    }                }                return reviver.call(holder, key, value);            }            cx.lastIndex = 0;            if (cx.test(text)) {                text = text.replace(cx, function (a) {                    return '\\u' +                        ('0000' + a.charCodeAt(0).toString(16)).slice(-4);                });            }            if (/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {                j = eval('(' + text + ')');                return typeof reviver === 'function' ?                    walk({'': j}, '') : j;            }            throw new SyntaxError('JSON.parse');        };    }}());
 
 function $(id) { return document.getElementById(id); }
-		
+
 addEventListener('load', function()
 {
 	var laurl = '';
@@ -88,7 +129,7 @@ addEventListener('load', function()
 	}
 	var pass=localStorage['password'];
 	if(!pass){
-		$('user').innerHTML=$('user').innerHTML+'<br />No password information.';
+	//	$('user').innerHTML=$('user').innerHTML+'<br />No password information.';
 	}
 	var includetitle=localStorage['includetitle'];
 		
@@ -99,20 +140,21 @@ addEventListener('load', function()
 	var bitlyid = localStorage['bitlyid'];
 	var bitlyapi = localStorage['bitlyapi'];
 	if(op_bitly=='true'){
-		var p = document.createElement('span');
+		var p = document.createElement('li');
 		p.id='bitly';
-		p.innerHTML = '<img src="bit.ly.png" atitle="Bit.Ly"/>';
+		p.innerHTML = '<a href="#"><img src="images/bit.ly.png" atitle="Bit.Ly"/></a>';
 		$('user').appendChild(p);	
 	}	
 	var bitly = $('bitly');
+	var bitlyURL = {};
 	if (bitly) {
 		bitly.addEventListener("click", function() {
 			xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function(){
 				if(xhr.readyState == 4 && xhr.status==200){
 					//let's parse resultant shor url
-					var bitlyresult = xhr.responseText;
-					var bitlypos=bitlyresult.search('"shortUrl": "http://bit.ly/');
+					var bitlyresult = xhr.responseText;					
+					/*var bitlypos=bitlyresult.search('"shortUrl": "http://bit.ly/');
 					if(bitlypos!=-1){
 						bitlyresult = bitlyresult.substring(bitlypos+13);
 						bitlypos=bitlyresult.search('"');
@@ -121,31 +163,31 @@ addEventListener('load', function()
 						}						
 					}else{
 						bitlyresult="Error!";
-					}
+					}*/
+					bitlyURL = JSON.parse(xhr.responseText);
+					if(bitlyURL['errorMessage'].length==0)
+					bitlyresult=bitlyURL['results'][laurl]['shortUrl'];
+					else bitlyresult=bitlyURL['errorMessage'];
 					if(includetitle=='true')
 					$("fe_text").innerHTML = titulo+' '+ bitlyresult;
 					else
 					$("fe_text").innerHTML = bitlyresult;					
-					var bitlyp = $('bitlyp');					
-					$('user').removeChild(bitlyp);
+					hideAdmin();
 					$("fe_text").select();
 					$("fe_text").focus();						
-				}		
+				}						
 			}
-			var bitlyp=document.createElement('span');
-			bitlyp.innerHTML = 'Shortening please wait...';
-			bitlyp.id='bitlyp';
-			$('user').appendChild(bitlyp);
-			xhr.open('GET','http://api.bit.ly/shorten?version=2.0.1&longUrl='+encodeURIComponent(laurl)+'&login='+bitlyid+'&apiKey='+bitlyapi,true);
+			showAdmin();
+			xhr.open('GET','http://api.bit.ly/shorten?version=2.0.1&longUrl='+encodeURIComponent(laurl)+'&login='+bitlyid+'&apiKey='+bitlyapi+'&format=json',true);
 			xhr.send(null);			
 		}, false);
 	}
 	//IS.GD
 	var op_isgd = localStorage['isgd'];
 	if(op_isgd=='true'){
-		var p = document.createElement('span');
+		var p = document.createElement('li');
 		p.id='isgd';
-		p.innerHTML = '<img src="is.gd.png" />';
+		p.innerHTML = '<a href="#"><img src="images/is.gd.png" /></a>';
 		$('user').appendChild(p);	
 	}	
 	var isgd = $('isgd');
@@ -158,16 +200,12 @@ addEventListener('load', function()
 					$("fe_text").innerHTML = titulo+' '+ xhr.responseText;					
 					else
 					$("fe_text").innerHTML = xhr.responseText;										
-					var isgdp = $('isgdp');					
-					$('user').removeChild(isgdp);
+					hideAdmin();
 					$("fe_text").select();
 					$("fe_text").focus();						
 				}		
 			}
-			var isgdp=document.createElement('span');
-			isgdp.innerHTML = 'Shortening please wait...';
-			isgdp.id='isgdp';
-			$('user').appendChild(isgdp);
+			showAdmin();
 			xhr.open('GET','http://is.gd/api.php?longurl='+encodeURIComponent(laurl),true);
 			xhr.send(null);			
 		}, false);
@@ -175,9 +213,9 @@ addEventListener('load', function()
 	//IR.PE
 	var op_irpe = localStorage['irpe'];
 	if(op_irpe=='true'){
-		var p = document.createElement('span');
+		var p = document.createElement('li');
 		p.id='irpe';
-		p.innerHTML = '<img src="ir.pe.png" />';
+		p.innerHTML = '<a href="#"><img src="images/ir.pe.png" /></a>';
 		$('user').appendChild(p);	
 	}	
 	var irpe = $('irpe');
@@ -189,16 +227,12 @@ addEventListener('load', function()
 					if(includetitle=='true')
 					$("fe_text").innerHTML = titulo+' '+ xhr.responseText;
 					else $("fe_text").innerHTML = xhr.responseText;					
-					var irpep = $('irpep');					
-					$('user').removeChild(irpep);
+					hideAdmin();
 					$("fe_text").select();
 					$("fe_text").focus();					
 				}		
 			}
-			var irpep=document.createElement('span');
-			irpep.innerHTML = 'Shortening please wait...';
-			irpep.id='irpep';
-			$('user').appendChild(irpep);
+			showAdmin();
 			xhr.open('GET','http://ir.pe/?url='+encodeURIComponent(laurl)+'&api=1',true);
 			xhr.send(null);			
 		}, false);
@@ -206,9 +240,9 @@ addEventListener('load', function()
 	//TinyURL
 	var op_tiny = localStorage['tiny'];
 	if(op_tiny=='true'){
-		var p = document.createElement('span');
+		var p = document.createElement('li');
 		p.id='tiny';
-		p.innerHTML = '<img src="tinyurl.bmp" />';
+		p.innerHTML = '<a href="#"><img src="images/tinyurl.bmp" /></a>';
 		$('user').appendChild(p);	
 	}	
 	var tiny = $('tiny');
@@ -221,16 +255,12 @@ addEventListener('load', function()
 					$("fe_text").innerHTML = titulo+' '+ xhr.responseText;
 					else
 					$("fe_text").innerHTML = xhr.responseText;										
-					var tinyp = $('tinyp');					
-					$('user').removeChild(tinyp);
+					hideAdmin();
 					$("fe_text").select();
 					$("fe_text").focus();					
 				}		
 			}
-			var tinyp=document.createElement('span');
-			tinyp.innerHTML = 'Shortening please wait...';
-			tinyp.id='tinyp';
-			$('user').appendChild(tinyp);
+			showAdmin();
 			xhr.open('GET','http://tinyurl.com/api-create.php?url='+encodeURIComponent(laurl),true);
 			xhr.send(null);			
 		}, false);
@@ -238,9 +268,9 @@ addEventListener('load', function()
 	//TR.IM
 	var op_trim = localStorage['trim'];
 	if(op_trim=='true'){
-		var p = document.createElement('span');
+		var p = document.createElement('li');
 		p.id='trim';
-		p.innerHTML = '<img src="tr.im.png" />';
+		p.innerHTML = '<a href="#"><img src="images/tr.im.png" /></a>';
 		$('user').appendChild(p);	
 	}	
 	var trim = $('trim');
@@ -253,26 +283,25 @@ addEventListener('load', function()
 					$("fe_text").innerHTML = titulo+' '+ xhr.responseText;
 					else
 					$("fe_text").innerHTML = xhr.responseText;					
-					var trimp = $('trimp');					
-					$('user').removeChild(trimp);
+					hideAdmin();
 					$("fe_text").select();
 					$("fe_text").focus();					
 				}		
 			}
-			var trimp=document.createElement('span');
-			trimp.innerHTML = 'Shortening please wait...';
-			trimp.id='trimp';
-			$('user').appendChild(trimp);
+			showAdmin();
 			xhr.open('GET','http://api.tr.im/v1/trim_simple?url='+encodeURIComponent(laurl),true);
 			xhr.send(null);			
 		}, false);
 	}
 	//CLI.GS
 	var op_cligs = localStorage['cligs'];
+	var cligsid = localStorage['cligsid'];
+	var cligsapi = localStorage['cligsapi'];
+	
 	if(op_cligs=='true'){
-		var p = document.createElement('span');
+		var p = document.createElement('li');
 		p.id='cligs';
-		p.innerHTML = '<img src="cligs.png" />';
+		p.innerHTML = '<a href="#"><img src="images/cligs.png" /></a>';
 		$('user').appendChild(p);	
 	}	
 	var cligs = $('cligs');
@@ -285,16 +314,15 @@ addEventListener('load', function()
 					$("fe_text").innerHTML = titulo+' '+ xhr.responseText;				
 					else
 					$("fe_text").innerHTML = xhr.responseText;									
-					var cligsp = $('cligsp');					
-					$('user').removeChild(cligsp);
 					$("fe_text").select();
 					$("fe_text").focus();					
+					hideAdmin();
 				}		
 			}
-			var cligsp=document.createElement('span');
-			cligsp.innerHTML = 'Shortening please wait...';
-			cligsp.id='cligsp';
-			$('user').appendChild(cligsp);
+			showAdmin();
+			if(cligsid && cligsapi && cligsid.length>0 && cligsapi.length>0)
+			xhr.open('GET','http://cli.gs/api/v1/cligs/create?url='+encodeURIComponent(laurl)+'&key='+cligsapi+'&appid='+cligsid,true);
+			else
 			xhr.open('GET','http://cli.gs/api/v1/cligs/create?url='+encodeURIComponent(laurl),true);
 			xhr.send(null);			
 		}, false);
@@ -311,7 +339,7 @@ addEventListener('load', function()
 					$('d_debug').removeChild(a);
 					var p = document.createElement('p');
 					if(xmlh.status==200||xmlh.status==304){
-						p.innerHTML = 'Status updated!';
+						p.innerHTML = '<strong>Status updated!</strong>';
 					}else{						
 						p.innerHTML = 'There was an error!';
 					}
@@ -320,7 +348,7 @@ addEventListener('load', function()
 			}
 			var a = document.createElement('p');
 			a.id='sent';
-			a.innerHTML = 'Sending update!';			
+			a.innerHTML = '<img src="images/ajax-loader.gif" />';			
 			$('d_debug').appendChild(a);	
 			xmlh.open('POST','https://twitter.com/statuses/update.xml',true,user,pass);
 			xmlh.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -370,17 +398,30 @@ function viewtweets(){
 
 }       
         
+function showAdmin(){
+$('bgadmin').style.display='';
+$('bgadmin2').style.display='';
+}
+function hideAdmin(){
+$('bgadmin').style.display='none';
+$('bgadmin2').style.display='none';
+}	
 </script>
-
+<div id="bgadmin" style="display:none;">&nbsp;</div> 
+<div id="bgadmin2" style="display:none;" onclick="hideAdmin();"> 
+  <div id="admin2" align="center"> 
+  <img src="images/loadings.gif" />
+  </div> 
+</div> 
 <div style="width:320px" align="center">
 <div id='settings' style="position:absolute">Settings</div>
 <div id='user'>&nbsp;</div>
-	<textarea id="fe_text"  onKeyUp="viewtweets()"></textarea>
+	<textarea id="fe_text"  onKeyUp="viewtweets()" onChange="clip.setText(this.value)"></textarea>
 	<div>&nbsp;</div>
 	<div id="d_clip_container">
 		<span id="d_clip_button">Send to clipboard</span>
 		<span id="postwit" style="display:none">Tweet Now</span>
 		<span id="stwit">Use Twitter</span>
 	</div>
-	<div id="d_debug"> </div>
+	<div id="d_debug" style="color:#000;"> </div>
 </div>

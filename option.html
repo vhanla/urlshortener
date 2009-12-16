@@ -75,6 +75,8 @@ function save_options(){
 	if($('tiny').checked)localStorage['tiny']='true';	else localStorage['tiny']='false';
 	if($('trim').checked)localStorage['trim']='true';	else localStorage['trim']='false';
 	if($('cligs').checked)localStorage['cligs']='true';	else localStorage['cligs']='false';
+	localStorage["cligsid"] = $('cligsid').value;
+	localStorage["cligsapi"] = $('cligsapi').value;
 	if($('bitly').checked)localStorage['bitly']='true';	else localStorage['bitly']='false';	
 	localStorage["bitlyid"] = $('bitlyid').value;
 	localStorage["bitlyapi"] = $('bitlyapi').value;
@@ -84,17 +86,25 @@ function save_options(){
 
 //read options
 function read_options(){
-	$('username').value=localStorage['username'];	
-	$('password').value=localStorage['password'];
+	if(localStorage['username'])	$('username').value=localStorage['username'];
+	else $('username').value='';
+	if(localStorage['password'])$('password').value=localStorage['password'];
+	else $('password').value='';
 	if(localStorage['includetitle']=='true')$('includetitle').checked=true;
 	if(localStorage['isgd']=='true')$('isgd').checked=true;
 	if(localStorage['irpe']=='true')$('irpe').checked=true;
 	if(localStorage['tiny']=='true')$('tiny').checked=true;
 	if(localStorage['trim']=='true')$('trim').checked=true;
 	if(localStorage['cligs']=='true')$('cligs').checked=true;
+	if(localStorage['cligsid'])$('cligsid').value=localStorage['cligsid'];
+	else $('cligsid').value='';
+	if(localStorage['cligsapi'])$('cligsapi').value=localStorage['cligsapi'];
+	else $('cligsapi').value='';
 	if(localStorage['bitly']=='true')$('bitly').checked=true;
-	$('bitlyid').value=localStorage['bitlyid'];
-	$('bitlyapi').value=localStorage['bitlyapi'];
+	if(localStorage['bitlyid'])$('bitlyid').value=localStorage['bitlyid'];
+	else $('bitlyid').value='';
+	if(localStorage['bitlyapi'])$('bitlyapi').value=localStorage['bitlyapi'];
+	else $('bitlyapi').value='';
 	//if(localStorage['snipurl']=='true')$('snipurl').checked=true;
 }
 
@@ -104,13 +114,13 @@ function read_options(){
 <fieldset>
 <legend accesskey=S>Choose which services to use:</legend>
 <span style="width:96%">Copy the title of the current site<input type="checkbox" id="includetitle"/></span><br />
-<span style="width:96%"><img src="bit.ly.png" /> Bit.ly<input type="checkbox" id="bitly"/><br />Requires your ID and APIKey : <br />ID: <input type="text" style="width:70%" id="bitlyid" /> <br />API<input type="text" style="width:70%" id="bitlyapi"/></span><br />
-<span style="width:96%"><img src="is.gd.png" /> Is.gd<input type="checkbox" id="isgd" /></span><br/>
-<span style="width:96%"><img src="tinyurl.bmp" /> TinyURL<input type="checkbox" id="tiny" /></span><br />
+<span style="width:96%"><img src="images\bit.ly.png" /> Bit.ly<input type="checkbox" id="bitly"/><br />Requires your ID and APIKey : <br />ID: <input type="text" style="width:70%" id="bitlyid" /> <br />API<input type="text" style="width:70%" id="bitlyapi"/></span><br />
+<span style="width:96%"><img src="images\is.gd.png" /> Is.gd<input type="checkbox" id="isgd" /></span><br/>
+<span style="width:96%"><img src="images\tinyurl.bmp" /> TinyURL<input type="checkbox" id="tiny" /></span><br />
 <!--SnipURL<input type="checkbox" /><br/>Requires your ID and APIKey : ID: <input type="text" /> API <input type="text" /><br />-->
-<span style="width:96%"><img src="ir.pe.png" /> Ir.Pe<input type="checkbox" id="irpe" /></span><br/>
-<span style="width:96%"><img src="tr.im.png" /> Tr.Im<input type="checkbox" id="trim" /></span><br/>
-<span style="width:96%"><img src="cligs.png" /> Cli.Gs<input type="checkbox" id="cligs" /></span><br/>
+<span style="width:96%"><img src="images\ir.pe.png" /> Ir.Pe<input type="checkbox" id="irpe" /></span><br/>
+<span style="width:96%"><img src="images\tr.im.png" /> Tr.Im<input type="checkbox" id="trim" /></span><br/>
+<span style="width:96%"><img src="images\cligs.png" /> Cli.Gs<input type="checkbox" id="cligs" /><br />Optional ID and APIKey : <br />ID: <input type="text" style="width:70%" id="cligsid" /> <br />API<input type="text" style="width:70%" id="cligsapi"/></span><br />
 </fieldset>
 <div align="center">
 <fieldset>
